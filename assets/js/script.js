@@ -13,7 +13,7 @@ const myLibrary = [];
 // Functions
 
 // function to update the read status
-function updateReadStatus(readStatusBtn, readStatus) {
+function updateReadStatus(readStatusBtn, readStatus, title) {
     readStatusBtn.addEventListener("click", () => {
         readStatus = !readStatus;
         readStatusBtn.textContent = readStatus ? "Read" : "Not Read";
@@ -24,15 +24,16 @@ function updateReadStatus(readStatusBtn, readStatus) {
             readStatusBtn.classList.remove("btn-success");
             readStatusBtn.classList.add("btn-secondary");
         }
-        // update in myLibrary array
+        // update the read status in myLibrary array
         myLibrary.forEach((book) => {
-            if (
-                book.title ===readStatusBtn.parentElement.parentElement.firstChild.textContent.slice(12)) {
+            if (book.title === title) {
                 book.readStatus = readStatus;
-                myLibrary.push(book);
                 saveToLocalStorage();
+                renderUI();
             }
         });
+      
+      
     });
 }
 
@@ -85,7 +86,7 @@ function renderUI() {
         }
 
         //make function to update the read status
-        updateReadStatus(readStatusBtn, readStatus);
+        updateReadStatus(readStatusBtn, readStatus, title);
 
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add("btn", "btn-danger");
@@ -94,18 +95,7 @@ function renderUI() {
         // function to delete the selected book
         deleteBook(deleteBtn, title);
 
-       
-       
 
-
-
-        
-
-   
-
-
-
-        
 
         cardBodyDiv.appendChild(titleElement);
         cardBodyDiv.appendChild(authorElement);
@@ -160,14 +150,17 @@ bookForm.addEventListener("submit", (e) => {
     const bookAuthor = authorInput.value;
     const bookPages = pagesInput.value;
     const bookReadStatus = readStatusCheckbox.checked;
+   
     // use functions
     addBookToLibrary(bookTitle, bookAuthor, bookPages, bookReadStatus);
 
     // clear the form
-    bookTitleInput.value = "";
-    authorInput.value = "";
-    pagesInput.value = "";
-    readStatusCheckbox.checked = false;
+    bookForm.reset();
+
+    // Hide the modal
+    //  const modal = bootstrap.Modal.getInstance(openModal);
+    //     modal.hide();
+
 });
 
 //  when the page loads get the books from local storage
