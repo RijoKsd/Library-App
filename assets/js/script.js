@@ -95,6 +95,13 @@ function renderUI() {
         deleteBook(deleteBtn, title);
 
        
+       
+
+
+
+        
+
+   
 
 
 
@@ -108,7 +115,7 @@ function renderUI() {
         cardBodyDiv.appendChild(buttonDiv);
         cardDiv.appendChild(cardBodyDiv);
         colDiv.appendChild(cardDiv);
-        cardContainer.appendChild(colDiv);
+        cardContainer.prepend(colDiv);
     });
 }
 
