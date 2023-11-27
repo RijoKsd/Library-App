@@ -41,7 +41,7 @@
               <div class="col-md-12 mb-3">
                 <label for="title" class="form-label">Book Title</label>
                 <input type="text" class="form-control" id="title" required />
-                 
+
               </div>
               <div class="col-md-12 mb-3">
                 <label for="author" class="form-label">Author</label>
@@ -49,7 +49,7 @@
               </div>
               <div class="col-12 mb-3">
                 <label for="pages" class="form-label">No of pages</label>
-                <input type="number" class="form-control" id="pages" required  min="0"/>
+                <input type="number" class="form-control" id="pages" required min="0" />
               </div>
               <div class="col-12 mb-3">
                 <div class="form-check">
@@ -71,15 +71,27 @@
     <!-- modal -->
 
     <!-- card section -->
-    <div class="container pt-4" >
+    <div class="container pt-4">
       <div class="row" id="card-container">
-     <!-- DOM content here -->
+        <!-- DOM content here -->
+      </div>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="container">
+      <div class="row p-3">
+        <div class="col-12 text-center">
+          <p class="m-0">
+            Made with <i class="bi bi-heart-fill text-danger"></i> by <a href="https://rijoksd.netlify.com"
+              target="_blank">Rijo Sebastian</a>
+          </p>
+         </div>
+
       </div>
     </div>
 
-
-
-  </main>
+  </footer>
 
   <!-- bootstrap js -->
   <script src="./assets/bootstrap-5.3.2-dist/js/bootstrap.min.js"></script>
@@ -90,230 +102,3 @@
 
 </html>
  
-
-
-
-
-
-
-<!-- 
-
-
-
-
-
-
-const cardContainer = document.querySelector("#card-container");
-const bookForm = document.getElementById('book-form');
-
-const bookTitleInput = document.getElementById('title');
-const authorInput = document.getElementById('author');
-const pagesInput = document.getElementById('pages');
-const readStatusCheckbox = document.getElementById('read-status');
-
-const myLibrary = [];
-
-
-// Functions
-
-// when the page loads get the books from local storage
-getBooksFromLocalStorage();
-renderUI();
-
-function renderUI() {
-    cardContainer.innerHTML = "";
-    myLibrary.forEach((book) => {
-        
-    });
-
-    
-}
-
-
-function getBooksFromLocalStorage() {
-    const books = JSON.parse(localStorage.getItem('myLibrary'));
-    if(books) {
-        // first clear the array
-        myLibrary.length = 0;
-        // push the books from local storage
-        myLibrary.push(...books);
-        renderUI( );
-    }
-
-  
-}
-
-
-function addBookToLibrary(bookTitle, author, pages, readStatus) {
-    const book = {
-        title: bookTitle,
-        author : author,
-        pages : pages,
-        readStatus : readStatus
-    }
-    myLibrary.push(book);
-    // push to local storage
-    localStorage.setItem('myLibrary', JSON.stringify(myLibrary));   
-
-//  get data from local storage
-    getBooksFromLocalStorage();
-}
-
-
-
-//  Event Listeners
-
-bookForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const bookTitle = bookTitleInput.value;
-    const author = authorInput.value;
-    const pages = pagesInput.value;
-    const readStatus = readStatusCheckbox.checked;
-    // use functions
-    addBookToLibrary(bookTitle, author, pages, readStatus);
-
-
-    // clear the form
-    bookTitleInput.value = '';
-    authorInput.value = '';
-    pagesInput.value = '';
-    readStatusCheckbox.checked = false;
-
-   
-});
-
-
-
-
-
-
-
-// let myLibrary = [
-//   {
-//     title: "The Lord of the Rings: The Fellowship of the Ring",
-//     author: "J.R.R. Tolkien",
-//     pages: 540,
-//     readStatus: false,
-//   },
-//   {
-//     title: "The Lord of the Rings: The Two Towers",
-//     author: "J.R.R. Tolkien",
-//     pages: 400,
-//     readStatus: true,
-//   },
-//   {
-//     title: "The Lord of the Rings: The Return of the King",
-//     author: "J.R.R. Tolkien",
-//     pages: 800,
-//     readStatus: false,
-//   },
-//   {
-//     title: "The Hobbit",
-//     author: "J.R.R. Tolkien",
-//     pages: 310,
-//     readStatus: true,
-//   },
-//   {
-//     title: "The Hitchhiker's Guide to the Galaxy",
-//     author: "Douglas Adams",
-//     pages: 240,
-//     readStatus: false,
-//   },
-//   {
-//     title: "The Martian",
-//     author: "Andy Weir",
-//     pages: 360,
-//     readStatus: true,
-//   },
-//   {
-//     title: "To Kill a Mockingbird",
-//     author: "Harper Lee",
-//     pages: 324,
-//     readStatus: false,
-//   },
-//   {
-//     title: "Pride and Prejudice",
-//     author: "Jane Austen",
-//     pages: 336,
-//     readStatus: true,
-//   },
-//   {
-//     title: "1984",
-//     author: "George Orwell",
-//     pages: 320,
-//     readStatus: false,
-//   },
-//   {
-//     title: "Animal Farm",
-//     author: "George Orwell",
-//     pages: 112,
-//     readStatus: true,
-//   },
-// ];
-
-
-
-
-
-
-myLibrary.map(({ title, author, pages, readStatus }) => {
-  const colDiv = document.createElement("div");
-  colDiv.classList.add("col-12", "col-md-6", "col-lg-4", "col-xl-3");
-  const cardDiv = document.createElement("div");
-  cardDiv.classList.add("card", "mb-3");
-  const cardBodyDiv = document.createElement("div");
-  cardBodyDiv.classList.add("card-body");
-  const titleElement = document.createElement("h5");
-  titleElement.classList.add("card-title");
-  titleElement.textContent = `Book Title : ${title}`;
-  const authorElement = document.createElement("h6");
-  authorElement.classList.add("card-subtitle", "mb-2", "text-muted");
-  authorElement.textContent = `Author : ${author}`;
-  const pagesElement = document.createElement("p");
-  pagesElement.classList.add("card-text");
-  pagesElement.textContent = `No of pages : ${pages}`;
-  const buttonDiv = document.createElement("div");
-  buttonDiv.classList.add("d-flex", "justify-content-between");
-  const readStatusBtn = document.createElement("button");
-
-  if (readStatus) {
-    readStatusBtn.classList.add("btn", "btn-success");
-  } else {
-    readStatusBtn.classList.add("btn", "btn-secondary");
-  }
-
-  readStatusBtn.textContent = readStatus ? "Read" : "Not Read";
-  const deleteBtn = document.createElement("button");
-  deleteBtn.classList.add("btn", "btn-danger");
-  deleteBtn.textContent = "Delete";
-
-  cardBodyDiv.appendChild(titleElement);
-  cardBodyDiv.appendChild(authorElement);
-  cardBodyDiv.appendChild(pagesElement);
-  buttonDiv.appendChild(readStatusBtn);
-  buttonDiv.appendChild(deleteBtn);
-  cardBodyDiv.appendChild(buttonDiv);
-  cardDiv.appendChild(cardBodyDiv);
-  colDiv.appendChild(cardDiv);
-  cardContainer.appendChild(colDiv);
-
-  // readStatusBtn.addEventListener("click", () => {
-  //     readStatusBtn.textContent = readStatusBtn.textContent === "Read" ? "Not Read" : "Read";
-  //     readStatusBtn.classList.toggle("btn-success");
-  //     readStatusBtn.classList.toggle("btn-secondary");
-  //     });
-
-  deleteBtn.addEventListener("click", () => {
-    cardContainer.removeChild(colDiv);
-    // remove from array
-    myLibrary.map((book) => {
-      if (book.title === title) {
-        console.log(title);
-        console.log("**************");
-        console.log(book.title);
-        myLibrary.splice(myLibrary.indexOf(book), 1);
-      }
-    });
-    console.log(myLibrary);
-  });
-}); -->
